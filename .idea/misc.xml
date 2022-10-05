@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/KotlinUdemyAndroid/MVVM_Clean_Architecture1/Application/app/src/main/res/layout/activity_movie.xml" value="0.25416666666666665" />
+        <entry key="..\:/KotlinUdemyAndroid/MVVM_Clean_Architecture1/Application/app/src/main/res/layout/list_item.xml" value="0.25416666666666665" />
         <entry key="..\:/KotlinUdemyAndroid/MVVM_Clean_Architecture1/app/src/main/res/drawable/btn_rounded.xml" value="0.173" />
         <entry key="..\:/KotlinUdemyAndroid/MVVM_Clean_Architecture1/app/src/main/res/layout/activity_artist.xml" value="0.25416666666666665" />
         <entry key="..\:/KotlinUdemyAndroid/MVVM_Clean_Architecture1/app/src/main/res/layout/activity_home.xml" value="0.25416666666666665" />
