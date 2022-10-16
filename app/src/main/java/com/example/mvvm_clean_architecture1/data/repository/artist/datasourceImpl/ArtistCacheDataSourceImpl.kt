@@ -4,7 +4,7 @@ import com.example.mvvm_clean_architecture1.data.model.artist.Artist
 import com.example.mvvm_clean_architecture1.data.model.artist.ArtistList
 import com.example.mvvm_clean_architecture1.data.repository.artist.datasource.ArtistCacheDataSource
 
-class ArtistCacheDataSourceImpl(): ArtistCacheDataSource {
+class ArtistCacheDataSourceImpl: ArtistCacheDataSource {
     private var artistList = ArrayList<Artist>()
     override suspend fun getArtistFromCache(): List<Artist>? = artistList
 

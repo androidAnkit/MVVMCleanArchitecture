@@ -3,14 +3,15 @@ package com.example.mvvm_clean_architecture1.presentation.movie
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.transition.Visibility
 import com.example.mvvm_clean_architecture1.R
 import com.example.mvvm_clean_architecture1.databinding.ActivityMovieBinding
 import com.example.mvvm_clean_architecture1.presentation.di.Injector
@@ -53,6 +54,35 @@ class MovieActivity : AppCompatActivity() {
                 binding.movieProgressBar.visibility = View.GONE
                 Toast.makeText(this, "No Data found on device", Toast.LENGTH_LONG).show()
             }
+        })
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_update -> {
+                updateMovies()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun updateMovies() {
+        binding.movieProgressBar.visibility = View.VISIBLE
+        val response = viewModel.updateMovies()
+        response.observe(this, Observer {
+            if (it != null) {
+                adapter.setList(it)
+                adapter.notifyDataSetChanged()
+                binding.movieProgressBar.visibility = View.GONE
+            } else
+                binding.movieProgressBar.visibility = View.GONE
         })
     }
 }

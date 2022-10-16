@@ -30,7 +30,7 @@ class ArtistRepositoryImpl
             val body = response?.body()
             body?.let {
                 artistList = it.artists
-            }
+            }?: Log.i("MYTAG","No Artist from the API");
         } catch (e: Exception) {
             Log.i("MYTAG", "The exception from Api artist is: ${e.message.toString()}")
         }
@@ -40,7 +40,9 @@ class ArtistRepositoryImpl
     suspend fun getDataFromDB(): List<Artist>{
         lateinit var artistList: List<Artist>
         try{
-            artistList = artistLocalDataSource.getArtistFromDB()!!
+            artistList?.let { artistLocalDataSource.getArtistFromDB() }
+        // or artistList = artistLocalDataSource.getArtistFromDB()!!
+
         }catch (e:Exception){
             Log.i("MYTAG", "The exception from DB artist is: ${e.message.toString()}")
         }
