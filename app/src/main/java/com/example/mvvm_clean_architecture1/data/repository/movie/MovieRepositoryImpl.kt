@@ -33,6 +33,8 @@ class MovieRepositoryImpl
             val body = response?.body()
             if (body != null) {
                 movieList = body.movies
+            }else{
+                Log.i("MYTAG", "No Movies from the API")
             }
         } catch (exception: Exception) {
             Log.i("MYTAG", "The exception from API is: ${exception.message.toString()}")

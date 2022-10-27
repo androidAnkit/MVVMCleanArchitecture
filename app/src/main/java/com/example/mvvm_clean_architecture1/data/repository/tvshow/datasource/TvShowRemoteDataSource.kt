@@ -5,5 +5,5 @@ import com.example.mvvm_clean_architecture1.data.model.tvShows.TvShowList
 import retrofit2.Response
 
 interface TvShowRemoteDataSource {
-    suspend fun getTvShows(): Response<TvShowList>
+    suspend fun getTvShows(): Response<TvShowList>?
 }

@@ -28,43 +28,42 @@ class ArtistRepositoryImpl
         try {
             val response = artistRemoteDataSource.getArtists()
             val body = response?.body()
-            body?.let {
-                artistList = it.artists
-            }?: Log.i("MYTAG","No Artist from the API");
+            if (body != null) {
+                artistList = body.artists
+            } else
+                Log.i("MYTAG", "No Artist from the API")
         } catch (e: Exception) {
             Log.i("MYTAG", "The exception from Api artist is: ${e.message.toString()}")
         }
         return artistList
     }
 
-    suspend fun getDataFromDB(): List<Artist>{
+    suspend fun getDataFromDB(): List<Artist> {
         lateinit var artistList: List<Artist>
-        try{
-            artistList?.let { artistLocalDataSource.getArtistFromDB() }
-        // or artistList = artistLocalDataSource.getArtistFromDB()!!
-
-        }catch (e:Exception){
+        try {
+            artistList = artistLocalDataSource.getArtistFromDB()!!
+        } catch (e: Exception) {
             Log.i("MYTAG", "The exception from DB artist is: ${e.message.toString()}")
         }
-        if(artistList.size>0){
+        if (artistList.size > 0) {
             return artistList
-        }else{
+        } else {
             artistList = getDataFromApi()
             artistLocalDataSource.saveArtistInDB(artistList)
         }
         return artistList
     }
 
-    suspend fun getDataFromCache(): List<Artist>{
+    suspend fun getDataFromCache(): List<Artist> {
         lateinit var artistList: List<Artist>
-        try{
+        try {
             artistList = artistCacheDataSource.getArtistFromCache()!!
-        }catch (e:Exception){
+        } catch (e: Exception) {
             Log.i("MYTAG", "The exception from cache artist is: ${e.message.toString()}")
         }
-        if(artistList.size>0){
+        if (artistList.size > 0) {
             return artistList
-        }else{
+        } else {
             artistList = getDataFromDB()
             artistCacheDataSource.saveArtistInCache(artistList)
         }

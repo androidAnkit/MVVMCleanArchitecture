@@ -29,9 +29,11 @@ class TvShowRepositioryImpl
         lateinit var tvShowList: List<TvShow>
         try {
             val response = tvShowRemoteDataSource.getTvShows()
-            val body = response.body()
-            body?.let {
+            val body = response?.body()
+            if(body!=null){
                 tvShowList = body.tvShows
+            }else{
+                Log.i("MYTAG", "No Movies from the API")
             }
         }catch (e: Exception){
             Log.i("MYTAG", "Exception from the Tvshow Api: ${e.message.toString()}")
